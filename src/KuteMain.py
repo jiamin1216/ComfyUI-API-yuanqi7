@@ -18,7 +18,7 @@ class KuteChangeFabricHandler():
         # 3.2.1 bright
         # 3.2.2 multiply
         # 3.2.3 rembg
-        # 3.3 layermerge
+        # 3.3 layer_merge
 
         # 第四步骤
         # 4.1 comfyUI sdxl
