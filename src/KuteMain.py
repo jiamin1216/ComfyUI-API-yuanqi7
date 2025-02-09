@@ -70,10 +70,15 @@ class KuteChangeFabricHandler:
         # todo 要根据json进行适配
 
 
-        # Final 返回处理完成后的图片在本地的地址
-        # todo
+        # Final 返回处理完成后的图片在本地的地址(先返回第三步骤最后的文件)
+        return layer_merge_save_path
 
 
 
 if __name__ == '__main__':
-    pass
+    handle = KuteChangeFabricHandler()
+    # 图片地址
+    cloth_img_path = "XXXX"
+    # 布料图片地址
+    fabric_img_path = "XXXX"
+    handle.change_fabric(cloth_img_path, fabric_img_path)
