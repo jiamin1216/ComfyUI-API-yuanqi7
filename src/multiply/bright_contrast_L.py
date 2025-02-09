@@ -26,6 +26,7 @@ def grayscale_adjust_brightness_contrast(image_path, output_path, brightness_fac
 # **使用示例**
 image_path = r"C:\Users\pc\Desktop\kute2025\step2layerpre\suit1fabric1\outsuit\mutiplypre_1\mutiplypre_1.png"  # 替换为你的图片路径
 output_path = r"C:\Users\pc\Desktop\kute2025\step3maskpre\3_2multiply\brightcon\outsui_1bc.png"  # 结果保存路径
+
 brightness_factor = 2.9  # 亮度增强 1.2 倍
 contrast_factor = 1.7  # 对比度增强 1.5 倍
 
