@@ -1,13 +1,12 @@
-import json
 import random
-from api_client import *
+from src.comfyui.api_client import *
 from typing import Literal
 from pydantic import BaseModel
 from fastapi import FastAPI, Form, responses
 
 API_URL = "127.0.0.1:8181"
 
-with open("prompt/text2img_lora.json", "r") as f:
+with open("../../prompt/text2img_lora.json", "r") as f:
     prompt = json.load(f)
 
 class Text2imgParams(BaseModel):

@@ -1,13 +1,11 @@
-import io
-import json
 import random
-from api_client import *
+from src.comfyui.api_client import *
 from pydantic import BaseModel
 from fastapi import FastAPI, UploadFile, File, Form, responses
 
 API_URL = "127.0.0.1:8181"
 
-with open("prompt/img2vid.json", "r") as f:
+with open("../../prompt/img2vid.json", "r") as f:
     prompt = json.load(f)
 
 class Img2vidParams(BaseModel):

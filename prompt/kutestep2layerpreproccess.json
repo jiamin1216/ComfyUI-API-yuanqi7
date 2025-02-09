@@ -1,0 +1,504 @@
+{
+  "17": {
+    "inputs": {
+      "image": "rawimg_0002 (1).png",
+      "upload": "image"
+    },
+    "class_type": "LoadImage",
+    "_meta": {
+      "title": "Load Image"
+    }
+  },
+  "25": {
+    "inputs": {
+      "model_name": "GroundingDINO_SwinB (938MB)"
+    },
+    "class_type": "GroundingDinoModelLoader (segment anything)",
+    "_meta": {
+      "title": "GroundingDinoModelLoader (segment anything)"
+    }
+  },
+  "26": {
+    "inputs": {
+      "model_name": "sam_vit_l (1.25GB)"
+    },
+    "class_type": "SAMModelLoader (segment anything)",
+    "_meta": {
+      "title": "SAMModelLoader (segment anything)"
+    }
+  },
+  "27": {
+    "inputs": {
+      "prompt": "Suits,top,coat",
+      "threshold": 0.5,
+      "sam_model": [
+        "26",
+        0
+      ],
+      "grounding_dino_model": [
+        "25",
+        0
+      ],
+      "image": [
+        "17",
+        0
+      ]
+    },
+    "class_type": "GroundingDinoSAMSegment (segment anything)",
+    "_meta": {
+      "title": "GroundingDinoSAMSegment (segment anything)"
+    }
+  },
+  "28": {
+    "inputs": {
+      "scale": 3,
+      "invert": false,
+      "image": [
+        "27",
+        0
+      ],
+      "mask": [
+        "27",
+        1
+      ]
+    },
+    "class_type": "BackgroundScaler",
+    "_meta": {
+      "title": "Background Scaler"
+    }
+  },
+  "29": {
+    "inputs": {
+      "images": [
+        "28",
+        0
+      ]
+    },
+    "class_type": "PreviewImage",
+    "_meta": {
+      "title": "Preview Image"
+    }
+  },
+  "30": {
+    "inputs": {
+      "mode": "foreground",
+      "threshold": 128,
+      "threshold_tolerance": 1,
+      "images": [
+        "28",
+        0
+      ]
+    },
+    "class_type": "Image Remove Background (Alpha)",
+    "_meta": {
+      "title": "Image Remove Background (Alpha)"
+    }
+  },
+  "31": {
+    "inputs": {
+      "output_path": "C:\\Users\\pc\\Desktop\\西装分层\\suit",
+      "filename_prefix": "button",
+      "filename_delimiter": "_",
+      "filename_number_padding": 4,
+      "filename_number_start": "false",
+      "extension": "png",
+      "dpi": 300,
+      "quality": 100,
+      "optimize_image": "true",
+      "lossless_webp": "false",
+      "overwrite_mode": "false",
+      "show_history": "false",
+      "show_history_by_prefix": "true",
+      "embed_workflow": "false",
+      "show_previews": "true",
+      "images": [
+        "30",
+        0
+      ]
+    },
+    "class_type": "Image Save",
+    "_meta": {
+      "title": "Image Save"
+    }
+  },
+  "34": {
+    "inputs": {
+      "model_name": "GroundingDINO_SwinT_OGC (694MB)"
+    },
+    "class_type": "GroundingDinoModelLoader (segment anything)",
+    "_meta": {
+      "title": "GroundingDinoModelLoader (segment anything)"
+    }
+  },
+  "35": {
+    "inputs": {
+      "model_name": "sam_vit_h (2.56GB)"
+    },
+    "class_type": "SAMModelLoader (segment anything)",
+    "_meta": {
+      "title": "SAMModelLoader (segment anything)"
+    }
+  },
+  "36": {
+    "inputs": {
+      "images": [
+        "37",
+        0
+      ]
+    },
+    "class_type": "PreviewImage",
+    "_meta": {
+      "title": "Preview Image"
+    }
+  },
+  "37": {
+    "inputs": {
+      "scale": 1.5,
+      "invert": false,
+      "image": [
+        "40",
+        0
+      ],
+      "mask": [
+        "40",
+        1
+      ]
+    },
+    "class_type": "BackgroundScaler",
+    "_meta": {
+      "title": "Background Scaler"
+    }
+  },
+  "38": {
+    "inputs": {
+      "mode": "foreground",
+      "threshold": 128,
+      "threshold_tolerance": 1,
+      "images": [
+        "37",
+        0
+      ]
+    },
+    "class_type": "Image Remove Background (Alpha)",
+    "_meta": {
+      "title": "Image Remove Background (Alpha)"
+    }
+  },
+  "39": {
+    "inputs": {
+      "output_path": "C:\\Users\\pc\\Desktop\\西装分层\\button",
+      "filename_prefix": "button",
+      "filename_delimiter": "_",
+      "filename_number_padding": 4,
+      "filename_number_start": "false",
+      "extension": "png",
+      "dpi": 300,
+      "quality": 100,
+      "optimize_image": "true",
+      "lossless_webp": "false",
+      "overwrite_mode": "false",
+      "show_history": "false",
+      "show_history_by_prefix": "true",
+      "embed_workflow": "false",
+      "show_previews": "true",
+      "images": [
+        "38",
+        0
+      ]
+    },
+    "class_type": "Image Save",
+    "_meta": {
+      "title": "Image Save"
+    }
+  },
+  "40": {
+    "inputs": {
+      "prompt": "button",
+      "threshold": 0.3,
+      "sam_model": [
+        "35",
+        0
+      ],
+      "grounding_dino_model": [
+        "34",
+        0
+      ],
+      "image": [
+        "17",
+        0
+      ]
+    },
+    "class_type": "GroundingDinoSAMSegment (segment anything)",
+    "_meta": {
+      "title": "GroundingDinoSAMSegment (segment anything)"
+    }
+  },
+  "44": {
+    "inputs": {
+      "images": [
+        "45",
+        0
+      ]
+    },
+    "class_type": "PreviewImage",
+    "_meta": {
+      "title": "Preview Image"
+    }
+  },
+  "45": {
+    "inputs": {
+      "scale": 0.87,
+      "invert": false,
+      "image": [
+        "17",
+        0
+      ],
+      "mask": [
+        "17",
+        1
+      ]
+    },
+    "class_type": "BackgroundScaler",
+    "_meta": {
+      "title": "Background Scaler"
+    }
+  },
+  "46": {
+    "inputs": {
+      "mode": "foreground",
+      "threshold": 138,
+      "threshold_tolerance": 2,
+      "images": [
+        "45",
+        0
+      ]
+    },
+    "class_type": "Image Remove Background (Alpha)",
+    "_meta": {
+      "title": "Image Remove Background (Alpha)"
+    }
+  },
+  "47": {
+    "inputs": {
+      "output_path": "C:\\Users\\pc\\Desktop\\西装分层\\collarmask",
+      "filename_prefix": "collarmask",
+      "filename_delimiter": "_",
+      "filename_number_padding": 4,
+      "filename_number_start": "false",
+      "extension": "png",
+      "dpi": 300,
+      "quality": 100,
+      "optimize_image": "true",
+      "lossless_webp": "false",
+      "overwrite_mode": "false",
+      "show_history": "false",
+      "show_history_by_prefix": "true",
+      "embed_workflow": "false",
+      "show_previews": "true",
+      "images": [
+        "46",
+        0
+      ]
+    },
+    "class_type": "Image Save",
+    "_meta": {
+      "title": "Image Save"
+    }
+  },
+  "48": {
+    "inputs": {
+      "images": [
+        "31",
+        0
+      ]
+    },
+    "class_type": "PreviewImage",
+    "_meta": {
+      "title": "Preview Image"
+    }
+  },
+  "49": {
+    "inputs": {
+      "images": [
+        "27",
+        0
+      ]
+    },
+    "class_type": "PreviewImage",
+    "_meta": {
+      "title": "Preview Image"
+    }
+  },
+  "50": {
+    "inputs": {
+      "images": [
+        "38",
+        0
+      ]
+    },
+    "class_type": "PreviewImage",
+    "_meta": {
+      "title": "Preview Image"
+    }
+  },
+  "51": {
+    "inputs": {
+      "images": [
+        "39",
+        0
+      ]
+    },
+    "class_type": "PreviewImage",
+    "_meta": {
+      "title": "Preview Image"
+    }
+  },
+  "52": {
+    "inputs": {
+      "images": [
+        "40",
+        0
+      ]
+    },
+    "class_type": "PreviewImage",
+    "_meta": {
+      "title": "Preview Image"
+    }
+  },
+  "54": {
+    "inputs": {
+      "mode": "foreground",
+      "threshold": 128,
+      "threshold_tolerance": 1,
+      "images": [
+        "61",
+        0
+      ]
+    },
+    "class_type": "Image Remove Background (Alpha)",
+    "_meta": {
+      "title": "Image Remove Background (Alpha)"
+    }
+  },
+  "55": {
+    "inputs": {
+      "images": [
+        "61",
+        0
+      ]
+    },
+    "class_type": "PreviewImage",
+    "_meta": {
+      "title": "Preview Image"
+    }
+  },
+  "56": {
+    "inputs": {
+      "images": [
+        "57",
+        0
+      ]
+    },
+    "class_type": "PreviewImage",
+    "_meta": {
+      "title": "Preview Image"
+    }
+  },
+  "57": {
+    "inputs": {
+      "output_path": "C:\\Users\\pc\\Desktop\\西装分层\\suit",
+      "filename_prefix": "button",
+      "filename_delimiter": "_",
+      "filename_number_padding": 4,
+      "filename_number_start": "false",
+      "extension": "png",
+      "dpi": 300,
+      "quality": 100,
+      "optimize_image": "true",
+      "lossless_webp": "false",
+      "overwrite_mode": "false",
+      "show_history": "false",
+      "show_history_by_prefix": "true",
+      "embed_workflow": "false",
+      "show_previews": "true",
+      "images": [
+        "54",
+        0
+      ]
+    },
+    "class_type": "Image Save",
+    "_meta": {
+      "title": "Image Save"
+    }
+  },
+  "58": {
+    "inputs": {
+      "images": [
+        "62",
+        0
+      ]
+    },
+    "class_type": "PreviewImage",
+    "_meta": {
+      "title": "Preview Image"
+    }
+  },
+  "59": {
+    "inputs": {
+      "model_name": "sam_hq_vit_b (379MB)"
+    },
+    "class_type": "SAMModelLoader (segment anything)",
+    "_meta": {
+      "title": "SAMModelLoader (segment anything)"
+    }
+  },
+  "60": {
+    "inputs": {
+      "model_name": "GroundingDINO_SwinT_OGC (694MB)"
+    },
+    "class_type": "GroundingDinoModelLoader (segment anything)",
+    "_meta": {
+      "title": "GroundingDinoModelLoader (segment anything)"
+    }
+  },
+  "61": {
+    "inputs": {
+      "scale": 1,
+      "invert": false,
+      "image": [
+        "62",
+        0
+      ],
+      "mask": [
+        "62",
+        1
+      ]
+    },
+    "class_type": "BackgroundScaler",
+    "_meta": {
+      "title": "Background Scaler"
+    }
+  },
+  "62": {
+    "inputs": {
+      "prompt": "pants",
+      "threshold": 0.7000000000000001,
+      "sam_model": [
+        "59",
+        0
+      ],
+      "grounding_dino_model": [
+        "60",
+        0
+      ],
+      "image": [
+        "17",
+        0
+      ]
+    },
+    "class_type": "GroundingDinoSAMSegment (segment anything)",
+    "_meta": {
+      "title": "GroundingDinoSAMSegment (segment anything)"
+    }
+  }
+}
