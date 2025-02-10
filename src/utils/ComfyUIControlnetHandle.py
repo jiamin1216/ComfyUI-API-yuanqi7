@@ -27,11 +27,11 @@ class ComfyUIControlnetHandle:
             generate_file = self.comfy_ui(input_image_name)
             print("生成的图片路径:{}", generate_file)
             if generate_file == '' or generate_file is None:
-                return jsonify({'error': '图片生成失败，请重试', 'code': 102})
-            return jsonify({'data': generate_file, 'code': 0, 'message': '图片生成成功'})
+                return {'error': '图片生成失败，请重试', 'code': 102}
+            return {'data': generate_file, 'code': 0, 'message': '图片生成成功'}
         except Exception as e:
-            print("error:{e}")
-            return jsonify({'data': '', 'code': 200, 'message': 'generate error'})
+            print(f"error: {e}")
+            return {'data': '', 'code': 200, 'message': 'generate error'}
 
     def comfy_ui(self, input_image_name):
         # 连接到comfyui
