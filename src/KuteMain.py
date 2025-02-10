@@ -11,16 +11,17 @@ from src.utils.ImageHandle import ImageHandle
 
 class KuteChangeFabricHandler:
     def __init__(self):
-        self.resize_folder =  r"C:\Users\pc\Desktop\kute2025\resize"
-        self.layer_preprocess_folder = r"C:\Users\pc\Desktop\kute2025\layer_preprocess"
-        # layer_preprocess_folder存在二级目录，请在这里管理，目录一定要和comfyUI json的路径一致
-        self.resize_repeat_folder = r"C:\Users\pc\Desktop\kute2025\resize_repeat"
-        self.mask_folder = r"C:\Users\pc\Desktop\kute2025\mask"
-        self.bright_folder = r"C:\Users\pc\Desktop\kute2025\bright"
-        self.layer_merge_folder = r"C:\Users\pc\Desktop\kute2025\layer_merge"
-        self.multiply_folder = r"C:\Users\pc\Desktop\kute2025\multiply"
-        self.rembg_folder = r"C:\Users\pc\Desktop\kute2025\rembg"
-        self.sdxl_folder = r"C:\Users\pc\Desktop\kute2025\sdxl"
+        self.resize_folder = r"E:\ComfyUI-API-yuanqi7\test1\resize"
+        self.layer_preprocess_folder = r"E:\ComfyUI-API-yuanqi7\test1\layer_preprocess"
+        self.resize_repeat_folder = r"E:\ComfyUI-API-yuanqi7\test1\resize_repeat"
+        self.mask_folder = r"E:\ComfyUI-API-yuanqi7\test1\mask"
+        self.masked_folder = r"E:\ComfyUI-API-yuanqi7\test1\masked"
+        self.bright_folder = r"E:\ComfyUI-API-yuanqi7\test1\bright"
+        self.layer_merge_folder = r"E:\ComfyUI-API-yuanqi7\test1\layer_merge"
+        self.multiply_folder = r"E:\ComfyUI-API-yuanqi7\test1\multiply"
+        self.rembg_folder = r"E:\ComfyUI-API-yuanqi7\test1\rembg"
+        self.sdxl_folder = r"E:\ComfyUI-API-yuanqi7\test1\sdxl"
+        self.ref_image_path = r"E:\ComfyUI-API-yuanqi7\test1\mask"
 
 
         self.preProcessHandle = ComfyUIPreProcessHandle()
@@ -55,10 +56,12 @@ class KuteChangeFabricHandler:
         layer_preprocess_image_final_name = os.path.join(self.layer_preprocess_folder, f"{unique_id}.png")
         shutil.move(layer_preprocess_image_name, layer_preprocess_image_final_name)
 
+        # add by xujing for test
+        layer_preprocess_image_name = r"E:\ComfyUI-API-yuanqi7\test1\layer_preprocess\suit1fabric1\button\button_1.png"
+
         # 第三步骤
         # 3.1.1 resize_repeat
-        #todo  这个步骤中要输入的是layer_preprocess二级文件夹下的哪一个文件？需要修改
-        resize_repeat_image = ImageHandle.tile_image(layer_preprocess_image_final_name)
+        resize_repeat_image = ImageHandle.tile_image(layer_preprocess_image_name)
         # 将resize_repeat后的图片存储到一个固定的文件夹里
         resize_repeat_save_path = os.path.join(self.resize_repeat_folder, f"{unique_id}.png")
         resize_repeat_image.save(resize_repeat_save_path, "PNG")
