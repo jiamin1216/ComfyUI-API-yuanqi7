@@ -37,34 +37,34 @@ class ImageHandle:
             return None
 
     @staticmethod
-    def tile_image(image_path: str, repeat_x=2, ref_image_path=None) -> Image.Image:
-        """
-        读取指定路径的图像，无缝平铺，等比例缩放（如果提供了参考图片），
-        使用 XID 生成唯一 ID，并保存到指定文件夹。
-        返回保存的文件路径。
-        """
+    def tile_image(image_path: str, repeat_x=2, target_width=None ) -> Image.Image:
+        """ 读取图片 -> 无缝平铺 -> 等比例缩放 -> 保存 """
         try:
-            with Image.open(image_path) as img:
-                width, height = img.size
-                repeat_y = repeat_x  # 纵向重复次数等于横向
-                new_width = width * repeat_x
-                new_height = height * repeat_y
+            # **1. 读取原始图片**
+            img = Image.open(image_path)
 
-                new_img = Image.new("RGB", (new_width, new_height))
-                for i in range(repeat_x):
-                    for j in range(repeat_y):
-                        new_img.paste(img, (i * width, j * height))
+            # **2. 计算新画布大小**
+            width, height = img.size
+            repeat_y = repeat_x  # 纵向重复次数等于横向
+            new_width = width * repeat_x
+            new_height = height * repeat_y
 
-                if ref_image_path:
-                    with Image.open(ref_image_path) as ref_img:
-                        target_width = ref_img.width
-                        scale_factor = target_width / new_width
-                        target_height = int(new_height * scale_factor)
-                        new_img = new_img.resize((target_width, target_height))
-                return new_img
+            # **3. 创建新画布并平铺**
+            new_img = Image.new("RGB", (new_width, new_height))
+            for i in range(repeat_x):
+                for j in range(repeat_y):
+                    new_img.paste(img, (i * width, j * height))
+
+            # **4. 如果提供了 target_width，则等比例缩放**
+            if target_width:
+                scale_factor = target_width / new_width  # 计算缩放比例
+                target_height = int(new_height * scale_factor)  # 保持比例缩放
+                new_img = new_img.resize((target_width, target_height), Image.LANCZOS)
+
+            # **5. 保存结果**
+            return new_img
         except Exception as e:
-            print(f"Failed to process and save tiled image: {e}")
-            return None
+            print(f" tile_image 处理 {image_path} 出错: {e}")
 
     @staticmethod
     def grayscale_adjust_brightness_contrast(image_path, brightness_factor=1.0, contrast_factor=1.0) -> Image.Image:
