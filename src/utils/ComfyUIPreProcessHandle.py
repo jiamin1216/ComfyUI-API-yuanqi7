@@ -13,13 +13,13 @@ from flask import jsonify
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
 # 图生图工作流文件
-WORKERFLOW = "layer_preprocess.json"
+WORKERFLOW = "../../prompt/layer_preprocess.json"
 COMFYUI_ENDPOINT = '127.0.0.1:8188'
 OUTPUT_FOLDER =  r"C:\Users\pc\Desktop\kute2025\layer_preprocess"
 
 client_id = str(uuid.uuid4())
 
-class ComfyUIHandle:
+class ComfyUIPreProcessHandle:
 
     def generate_image(self, input_image_name: str):
         try:

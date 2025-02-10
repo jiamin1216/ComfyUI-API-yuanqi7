@@ -5,7 +5,8 @@ import os
 
 from PIL import Image, ImageEnhance
 
-from src.utils.ComfyUIHandle import ComfyUIHandle
+from src.utils.ComfyUIControlnetHandle import ComfyUIControlnetHandle
+from src.utils.ComfyUIPreProcessHandle import ComfyUIHandle, ComfyUIPreProcessHandle
 from src.utils.ImageHandle import ImageHandle
 
 class KuteChangeFabricHandler:
@@ -22,7 +23,9 @@ class KuteChangeFabricHandler:
         self.sdxl_folder = r"C:\Users\pc\Desktop\kute2025\sdxl"
 
 
-        self.comfyHandle = ComfyUIHandle()
+        self.preProcessHandle = ComfyUIPreProcessHandle()
+        self.controlnetHandle = ComfyUIControlnetHandle()
+
 
     def change_fabric(self, cloth_img_path, fabric_img_path):
         # 这个图像的唯一ID
@@ -37,10 +40,9 @@ class KuteChangeFabricHandler:
         resize_image.save(resize_save_path, "PNG")
 
         # 第二步骤 调用一个comfyUI layer preprocess
-        layer_preprocess_response =  self.comfyHandle.generate_image(resize_save_path)
+        layer_preprocess_response =  self.preProcessHandle.generate_image(resize_save_path)
         code = layer_preprocess_response.get('code')
         # 根据返回的 code 进行不同的处理
-        layer_preprocess_image_name = ""
         if code == 0:
             # 图片生成成功，返回路径
             data = layer_preprocess_response.get('data')
@@ -87,12 +89,24 @@ class KuteChangeFabricHandler:
 
         # 第四步骤
         # 4.1 comfyUI sdxl
-        # todo 要根据json进行适配
+        controlnet_response = self.controlnetHandle.generate_image(layer_merge_save_path)
+        code = controlnet_response.get('code')
+
+        # 根据返回的 code 进行不同的处理
+        if code == 0:
+            # 图片生成成功，返回路径
+            data = controlnet_response.get('data')
+            if data:
+                controlnet_image_name = data
+            else:
+                return {"status": "error", "message": "controlnet comfyUI 没有返回图片路径"}
+        else:
+            return {"status": "error", "message": "未知错误，controlnet comfyUI  返回了未知的 code"}
+        controlnet_image_final_name = os.path.join(self.sdxl_folder, f"{unique_id}.png")
+        shutil.move(controlnet_image_name, controlnet_image_final_name)
 
         # Final 返回处理完成后的图片在本地的地址(先返回第三步骤最后的文件)
-        return layer_merge_save_path
-
-
+        return controlnet_image_final_name
 
 if __name__ == '__main__':
     handle = KuteChangeFabricHandler()
