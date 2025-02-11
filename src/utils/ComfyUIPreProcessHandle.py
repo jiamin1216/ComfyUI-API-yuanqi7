@@ -119,3 +119,4 @@ class ComfyUIPreProcessHandle:
 
         print("Timeout waiting for new file.")
         return None
+
